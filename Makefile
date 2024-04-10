@@ -1,6 +1,6 @@
 up-d:
 	@docker-compose up -d
-	
+
 up:
 	@docker-compose up
 
@@ -19,14 +19,20 @@ stop:
 restart:
 	@docker restart $(shell docker ps -q)
 
+new-migrate:
+	@ID=$(shell docker ps -q --filter "name=cms-payload_cms_1") && echo $$ID && docker exec -it $$ID sh -c "npm run payload migrate:create"
+
+run-migrate:
+	@ID=$(shell docker ps -q --filter "name=cms-payload_cms_1") && echo $$ID && docker exec -it $$ID sh -c "npm run payload migrate"
+
 logs:
 	@docker-compose logs -f
 
 exec-db:
-	@docker exec -it cms_db_1 bash
+	@ID=$(shell docker ps -q --filter "name=cms-payload_db_cms_1") && echo $$ID && docker exec -it $$ID sh
 
 exec-app:
-	@docker exec -it cms_app_1 bash
+	@ID=$(shell docker ps -q --filter "name=cms-payload_cms_1") && echo $$ID && docker exec -it $$ID sh
 
 prune-db:
 	@docker exec -it cms_db_1 bash -c "mysql -u root -p123456 -e 'DROP DATABASE cms;'"
