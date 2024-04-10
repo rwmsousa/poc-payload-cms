@@ -1,10 +1,9 @@
 import { CollectionConfig } from 'payload/types'
 
-const Procedimentos: CollectionConfig = {
+export const Procedimentos: CollectionConfig = {
   slug: 'procedimentos',
-  auth: true,
   fields: [
-   {
+    {
       name: 'tipo',
       label: 'Tipo',
       type: 'text',
@@ -27,8 +26,6 @@ const Procedimentos: CollectionConfig = {
       label: 'Descrição',
       type: 'textarea',
       required: false,
-    }
+    },
   ],
-}
-
-export default Procedimentos
+};

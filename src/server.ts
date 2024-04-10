@@ -9,6 +9,14 @@ app.get('/', (_, res) => {
   res.redirect('/admin')
 })
 
+app.get('/users', (_, res) => {
+  res.redirect('/users');
+});
+
+app.get('/procedimentos', (_, res) => {
+  res.redirect('/procedimentos');
+});
+
 const start = async () => {
   // Initialize Payload
   await payload.init({
@@ -20,6 +28,8 @@ const start = async () => {
   })
 
   // Add your own express routes here
+
+
 
   app.listen(3000)
 }
