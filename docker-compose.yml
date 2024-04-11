@@ -4,7 +4,7 @@ services:
   cms:
     image: node:18-alpine
     ports:
-      - '3000:3000'
+      - '1337:1337'
     restart: always
     volumes:
       - .:/home/node/app
@@ -20,7 +20,7 @@ services:
     image: postgres:latest
     restart: unless-stopped
     ports:
-      - '5500:5432'
+      - '5434:5432'
     volumes:
       - data:/data/db_cms
     environment:
