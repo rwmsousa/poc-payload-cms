@@ -1,20 +1,18 @@
-up-d:
-	@docker-compose up -d
 
 up:
-	@docker-compose up
+	@docker-compose up -d
 
-down:
-	@docker-compose down
+start:
+	@docker-compose start cms db_cms
+
+stop:
+	@docker-compose stop
 
 build:
 	@docker-compose build
 
 run:
 	@docker run -d -p 3000:3000 cms
-
-stop:
-	@docker stop $(shell docker ps -q)
 
 restart:
 	@docker restart $(shell docker ps -q)
@@ -39,6 +37,3 @@ prune-db:
 
 prune-app:
 	@docker exec -it cms_app_1 bash -c "rm -rf /app/node_modules"
-
-clean:
-	@docker system prune -a
