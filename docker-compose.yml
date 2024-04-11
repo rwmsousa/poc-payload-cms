@@ -22,7 +22,7 @@ services:
     ports:
       - '5434:5432'
     volumes:
-      - data:/data/db_cms
+      - data:/data/postgres
     environment:
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
