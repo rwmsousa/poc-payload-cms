@@ -8,21 +8,25 @@ import { buildConfig } from 'payload/config'
 
 import {Users} from './collections/Users'
 import {Procedimentos} from './collections/Procedimentos'
+import BeforeLogin from './components/BeforeLogin'
 
 export default buildConfig({
+  collections: [Users],
   admin: {
-    user: Users.slug,
     bundler: webpackBundler(),
+    components: {
+      beforeLogin: [BeforeLogin],
+    },
   },
   editor: slateEditor({}),
-  collections: [Users, Procedimentos],
   typescript: {
     outputFile: path.resolve(__dirname, 'payload-types.ts'),
   },
   graphQL: {
     schemaOutputFile: path.resolve(__dirname, 'generated-schema.graphql'),
   },
-  plugins: [payloadCloud()],
+  cors: [process.env.PAYLOAD_PUBLIC_SERVER_URL || '', process.env.PAYLOAD_PUBLIC_SITE_URL || ''].filter(Boolean),
+  csrf: [process.env.PAYLOAD_PUBLIC_SERVER_URL || '', process.env.PAYLOAD_PUBLIC_SITE_URL || ''].filter(Boolean),
   db: postgresAdapter({
     pool: {
       connectionString: process.env.DATABASE_URI,
