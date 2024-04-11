@@ -1,37 +1,35 @@
-import express from 'express'
-import payload from 'payload'
+import express from 'express';
+import path from 'path';
+import payload from 'payload';
 
-require('dotenv').config()
-const app = express()
+import { seed } from './seed';
 
-// Redirect root to Admin panel
+// eslint-disable-next-line
+require('dotenv').config({
+  path: path.resolve(__dirname, '../.env'),
+});
+
+const app = express();
+
 app.get('/', (_, res) => {
-  res.redirect('/admin')
-})
-
-app.get('/users', (_, res) => {
-  res.redirect('/users');
+  res.redirect('/admin');
 });
 
-app.get('/procedimentos', (_, res) => {
-  res.redirect('/procedimentos');
-});
-
-const start = async () => {
-  // Initialize Payload
+const start = async (): Promise<void> => {
   await payload.init({
     secret: process.env.PAYLOAD_SECRET,
     express: app,
-    onInit: async () => {
-      payload.logger.info(`Payload Admin URL: ${payload.getAdminURL()}`)
+    onInit: () => {
+      payload.logger.info(`Payload Admin URL: ${payload.getAdminURL()}`);
     },
-  })
+  });
 
-  // Add your own express routes here
+  if (process.env.PAYLOAD_PUBLIC_SEED === 'true') {
+    payload.logger.info('---- SEEDING DATABASE ----');
+    await seed(payload);
+  }
 
+  app.listen(3000);
+};
 
-
-  app.listen(3000)
-}
-
-start()
+start();
