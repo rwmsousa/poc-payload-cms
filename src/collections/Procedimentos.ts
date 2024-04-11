@@ -1,4 +1,7 @@
 import { CollectionConfig } from 'payload/types'
+import { admins } from './access/admins'
+import adminsAndUser from './access/adminsAndUser'
+import { anyone } from './access/anyone'
 
 export const Procedimentos: CollectionConfig = {
   slug: 'procedimentos',
@@ -29,9 +32,9 @@ export const Procedimentos: CollectionConfig = {
     },
   ],
   access: {
-    create: ({ req: { user } }) => user && (user.role === 'admin' || user.role === 'user'),
-    read: ({ req: { user } }) => user && (user.role === 'admin' || user.role === 'user'),
-    update: ({ req: { user } }) => user && (user.role === 'admin' || user.role === 'user'),
-    delete: ({ req: { user } }) => user && (user.role === 'admin' || user.role === 'user'),
+    read: adminsAndUser,
+    create: anyone,
+    update: adminsAndUser,
+    delete: admins,
   },
-};
+}
