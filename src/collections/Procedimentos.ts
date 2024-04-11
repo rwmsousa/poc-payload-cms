@@ -28,4 +28,10 @@ export const Procedimentos: CollectionConfig = {
       required: false,
     },
   ],
+  access: {
+    create: ({ req: { user } }) => user && (user.role === 'Admin' || user.role === 'Editor'),
+    read: ({ req: { user } }) => user && (user.role === 'Admin' || user.role === 'Editor'),
+    update: ({ req: { user } }) => user && (user.role === 'Admin' || user.role === 'Editor'),
+    delete: ({ req: { user } }) => user && (user.role === 'Admin' || user.role === 'Editor'),
+  },
 };

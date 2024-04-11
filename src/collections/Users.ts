@@ -7,8 +7,24 @@ export const Users: CollectionConfig = {
     useAsTitle: 'email',
   },
   fields: [
-    // Email added by default
-    // Add more fields as needed
+    {
+      name: 'role',
+      type: 'select',
+      options: ['Admin', 'Editor'],
+      required: true,
+    },
   ],
-}
+  access: {
+    create: ({ req: { user } }) => user && user.role === 'admin',
+    read: ({ req }) => {
+      const { user } = req;
+      return user && (user.role === 'admin' || user.id === req.params.id);
+    },
+    update: ({ req }) => {
+      const { user } = req;
+      return user && (user.role === 'admin' || user.id === req.params.id);
+    },
+    delete: ({ req: { user } }) => user && user.role === 'admin',
+  },
+};
 
