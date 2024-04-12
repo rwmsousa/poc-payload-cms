@@ -6,15 +6,11 @@ import { slateEditor } from '@payloadcms/richtext-slate'
 import { buildConfig } from 'payload/config'
 import {Users} from './collections/Users'
 import {Procedimentos} from './collections/Procedimentos'
-import BeforeLogin from './components/BeforeLogin'
 
 export default buildConfig({
   collections: [Users, Procedimentos],
   admin: {
     bundler: webpackBundler(),
-    components: {
-      beforeLogin: [BeforeLogin],
-    },
   },
   editor: slateEditor({}),
   typescript: {

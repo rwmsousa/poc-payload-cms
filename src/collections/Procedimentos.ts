@@ -32,8 +32,8 @@ export const Procedimentos: CollectionConfig = {
     },
   ],
   access: {
-    read: adminsAndUser,
-    create: anyone,
+    read: anyone,
+    create: adminsAndUser,
     update: adminsAndUser,
     delete: admins,
   },

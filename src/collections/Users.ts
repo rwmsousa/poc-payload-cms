@@ -22,10 +22,9 @@ export const Users: CollectionConfig = {
   },
   access: {
     read: adminsAndUser,
-    create: anyone,
-    update: adminsAndUser,
+    create: admins,
+    update: admins,
     delete: admins,
-    admin: ({ req: { user } }) => checkRole(['admin'], user),
   },
   hooks: {
     afterChange: [loginAfterCreate],
@@ -59,4 +58,4 @@ export const Users: CollectionConfig = {
       ],
     },
   ],
-};
+}

@@ -2,6 +2,7 @@ import express from 'express';
 import path from 'path';
 import payload from 'payload';
 
+// import { seed } from './seed'
 
 // eslint-disable-next-line
 require('dotenv').config({
@@ -11,7 +12,7 @@ require('dotenv').config({
 const app = express();
 
 app.get('/', (_, res) => {
-  res.redirect('/admin');
+  res.redirect('/admin')
 });
 
 const start = async (): Promise<void> => {
@@ -22,6 +23,10 @@ const start = async (): Promise<void> => {
       payload.logger.info(`Payload Admin URL: ${payload.getAdminURL()}`);
     },
   });
+
+  //  if (process.env.PAYLOAD_PUBLIC_SEED === 'true') {
+  //    await seed(payload)
+  //  }
 
   app.listen(3000);
 };
