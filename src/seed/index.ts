@@ -4,7 +4,7 @@ export const seed = async (payload: Payload): Promise<void> => {
   const user = await payload.find({
     collection: 'users',
     where: {
-      email: { equals: 'demo@payloadcms.com' },
+      email: { equals: process.env.PAYLOAD_USER_MASTER },
     },
   })
 
@@ -13,8 +13,8 @@ export const seed = async (payload: Payload): Promise<void> => {
     await payload.create({
       collection: 'users',
       data: {
-        email: 'demo@payloadcms.com',
-        password: 'demo',
+        email: process.env.PAYLOAD_USER_MASTER,
+        password: process.env.PAYLOAD_PASSWORD_MASTER,
         roles: ['admin'],
       },
     })
