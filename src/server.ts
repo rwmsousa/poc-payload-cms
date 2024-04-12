@@ -1,8 +1,7 @@
 import express from 'express';
 import path from 'path';
 import payload from 'payload';
-
-// import { seed } from './seed'
+import { seed } from './seed'
 
 // eslint-disable-next-line
 require('dotenv').config({
@@ -24,9 +23,9 @@ const start = async (): Promise<void> => {
     },
   });
 
-  //  if (process.env.PAYLOAD_PUBLIC_SEED === 'true') {
-  //    await seed(payload)
-  //  }
+   if (process.env.PAYLOAD_PUBLIC_SEED === 'true') {
+     await seed(payload)
+   }
 
   app.listen(3000);
 };
