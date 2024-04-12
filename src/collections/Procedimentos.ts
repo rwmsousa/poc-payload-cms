@@ -1,10 +1,12 @@
 import { CollectionConfig } from 'payload/types'
+import { admins } from './access/admins'
+import adminsAndUser from './access/adminsAndUser'
+import { anyone } from './access/anyone'
 
-const Procedimentos: CollectionConfig = {
+export const Procedimentos: CollectionConfig = {
   slug: 'procedimentos',
-  auth: true,
   fields: [
-   {
+    {
       name: 'tipo',
       label: 'Tipo',
       type: 'text',
@@ -27,8 +29,12 @@ const Procedimentos: CollectionConfig = {
       label: 'Descrição',
       type: 'textarea',
       required: false,
-    }
+    },
   ],
+  access: {
+    read: anyone,
+    create: adminsAndUser,
+    update: adminsAndUser,
+    delete: admins,
+  },
 }
-
-export default Procedimentos
