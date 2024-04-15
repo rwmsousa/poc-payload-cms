@@ -1,8 +1,26 @@
 {
+  "version": 2,
   "rewrites": [
     {
-      "source": "/:path*",
-      "destnation": "/admin"
+      "source": "/(.*)",
+      "destination": "src/server.js"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        }
+      ]
+    }
+  ],
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/node"
     }
   ]
 }
