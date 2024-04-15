@@ -1,18 +1,8 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "package.json",
-      "use": "@vercel/node"
-    }
-  ],
   "rewrites": [
     {
       "source": "/(.*)",
-      "dest": "/admin"
+      "destnation": "/admin"
     }
-  ],
-  "env": {
-    "PAYLOAD_PUBLIC_SEED": "true"
-  }
+  ]
 }
